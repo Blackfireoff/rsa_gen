@@ -11,6 +11,7 @@ class MainWindow:
     def __init__(self):
         self.app = QApplication(sys.argv)
         self.window = loadUi(Path().joinpath("data", "ui", "mainwindow.ui"))
+        self.dialogexec=0
         self.window.show()
         self.init_ui()
         self.app.exec()
@@ -43,18 +44,27 @@ class MainWindow:
             print(e)
 
     def click_on_pubkey(self):
-        dialog = QFileDialog(self.window)
-        dialog.show()
-        if dialog.exec_():
-            fileNames = dialog.selectedFiles()
-        self.window.TE_pubkey.setText(fileNames[0])
+        if not self.dialogexec:
+            self.dialogexec=1
+            fileNames = self.open_dialog()
+            if fileNames:
+                self.window.TE_pubkey.setText(fileNames[0])
+            self.dialogexec = 0
 
     def click_on_privkey(self):
+        if not self.dialogexec:
+            self.dialogexec = 1
+            fileNames=self.open_dialog()
+            if fileNames:
+                self.window.TE_privkey.setText(fileNames[0])
+            self.dialogexec = 0
+
+    def open_dialog(self):
+        fileNames=[]
         dialog = QFileDialog(self.window)
         dialog.show()
         if dialog.exec_():
             fileNames = dialog.selectedFiles()
-        self.window.TE_privkey.setText(fileNames[0])
-
+        return fileNames
 
 window = MainWindow()
