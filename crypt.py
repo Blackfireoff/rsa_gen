@@ -1,10 +1,9 @@
 import rsa
-with open('cle_pub.pem', mode='r') as publickey:
+with open('cle_pub.pem', mode='rb') as publickey:
     keydata = publickey.read()
-publickey = rsa.key.PublicKey(keydata,1024)
+publickey = rsa.PublicKey.load_pkcs1(keydata)
 
-print(publickey)
-message = 'hello Bob!'.encode('utf8')
+message = input("Type your message here : ").encode('utf8')
 
 crypto = rsa.encrypt(message, publickey)
 
