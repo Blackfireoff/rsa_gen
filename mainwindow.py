@@ -16,10 +16,21 @@ class MainWindow:
 
     def init_ui(self):
         self.window.act_crypt.triggered.connect(self.crypt)
+        self.window.act_decrypt.triggered.connect(self.decrypt)
 
     def crypt(self):
-        crypted_message = crypt(self.window.TE_cleartext.toPlainText())
-        self.window.TE_cryptedtext.set
+        try:
+            crypted_message = crypt(self.window.TE_cleartext.toPlainText())
+            self.window.TE_cryptedtext.setText(crypted_message.decode("utf-8"))
+        except Exception as e:
+            print(e)
+
+    def decrypt(self):
+        try:
+            clear_message = decrypt(self.window.TE_cryptedtext.toPlainText().encode("utf-8"))
+            self.window.TE_cleartext.setText(clear_message.decode("utf-8"))
+        except Exception as e:
+            print(e)
 
 
 
