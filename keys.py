@@ -1,10 +1,19 @@
 import rsa
-(pubkey,privkey) = rsa.newkeys(4096)
+(pubkey,privkey) = rsa.newkeys(1024)
 
-fichier = open("cle_pub.pem","a")
-fichier.write(str(pubkey))
-fichier.close()
+print(pubkey)
+print(type(pubkey))
 
-fichier = open("cle_priv.pem","a")
-fichier.write(str(privkey))
-fichier.close()
+with open("cle_pub.pem","wb") as f:
+    f.write(pubkey.save_pkcs1('PEM')
+    f.close()
+
+with open("cle_priv.pem","wb") as f:
+    f.write(privkey.save_pkcs1('PEM')
+    f.close()
+
+message = 'hello Bob!'.encode('utf8')
+
+crypto = rsa.encrypt(message, pubkey)
+
+print(crypto)
