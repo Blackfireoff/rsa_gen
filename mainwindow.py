@@ -27,15 +27,19 @@ class MainWindow:
         try:
             crypted_message = crypt(self.window.TE_cleartext.toPlainText(),self.window.TE_pubkey.toPlainText())
             self.window.TE_cryptedtext.setText(crypted_message.decode("utf-8"))
+            self.window.L_no_pubkey.setText('')
         except Exception as e:
             print(e)
+            self.window.L_no_pubkey.setText('<font color=\'red\'><strong> Aucune clé <br> publique <br> importée !</strong></font>')
 
     def decrypt(self):
         try:
             clear_message = decrypt(self.window.TE_cryptedtext.toPlainText().encode("utf-8"),self.window.TE_privkey.toPlainText())
             self.window.TE_cleartext.setText(clear_message.decode("utf-8"))
+            self.window.L_no_privkey.setText('')
         except Exception as e:
             print(e)
+            self.window.L_no_privkey.setText('<font color=\'red\'><strong> Aucune clé <br> privée <br> importée !</strong></font>')
 
     def gen_keys(self):
         try:
@@ -66,5 +70,8 @@ class MainWindow:
         if dialog.exec_():
             fileNames = dialog.selectedFiles()
         return fileNames
+
+
+
 
 window = MainWindow()
