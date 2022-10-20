@@ -3,3 +3,6 @@
 /message_crypt.LML.old
 /message_crypt.LML.bak
 /message_crypt.LML
+/__pycache__
+/.idea
+/mainwindow.spec

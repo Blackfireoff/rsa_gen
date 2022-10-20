@@ -10,7 +10,7 @@ import logging
 class MainWindow:
     def __init__(self):
         self.app = QApplication(sys.argv)
-        self.window = loadUi(Path().joinpath("data", "ui", "mainwindow.ui"))
+        self.window = loadUi("mainwindow.ui")
         self.dialogexec=0
         self.window.show()
         self.init_ui()
