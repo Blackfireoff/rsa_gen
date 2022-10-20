@@ -6,3 +6,7 @@
 /__pycache__
 /.idea
 /mainwindow.spec
+.idea/misc.xml
+.idea/rsa_gen.iml
+__pycache__/keys.cpython-39.pyc
+__pycache__/rsa_generator.cpython-39.pyc
